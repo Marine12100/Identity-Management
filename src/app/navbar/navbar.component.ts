@@ -20,6 +20,6 @@ export class NavbarComponent {
   constructor(private breakpointObserver: BreakpointObserver) {}
 
   logout(): void {
-    
+    // Plus tard ...
   }
 }

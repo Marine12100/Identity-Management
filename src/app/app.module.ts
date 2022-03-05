@@ -14,15 +14,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { LdapDetailComponent } from './ldap-detail/ldap-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LdapListComponent,
     PageNotFoundComponent,
-    NavbarComponent
+    NavbarComponent,
+    LdapDetailComponent
   ],
   imports: [
+    MatFormFieldModule,
+    MatSlideToggleModule,
+    MatIconModule,
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,

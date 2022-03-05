@@ -12,6 +12,8 @@
           aria-label="Side nav toggle  icon">menu</mat-icon>
     </button>
     <span>Gestion des utilisateurs</span>
+
+    <!-- This fills the remaining space of the current row -->
     <span class="fill-remaining-space"></span>
     <button mat-button (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
@@ -29,6 +31,13 @@
         <h2 matSubheader>Utilisateur</h2>
         <a mat-list-item
           routerLink="/users/dashboard"
+          routerLinkActive="list-item-active"
+        >
+          <mat-icon matListIcon>dashboard</mat-icon>
+          Dashboard
+        </a>
+        <a mat-list-item
+          routerLink="/users/list"
           routerLinkActive="list-item-active"
         >
           <mat-icon matListIcon>list</mat-icon>
@@ -49,11 +58,10 @@
       </mat-nav-list>
     </mat-sidenav>  
     <mat-sidenav-content>
-
-    <div class="main_content">
-      <router-outlet></router-outlet>
-    </div>
-    
+      <!-- Content Here -->
+      <div class="main_content">
+        <router-outlet></router-outlet>
+      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
