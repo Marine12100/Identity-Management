@@ -1,6 +1,9 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserLdap } from '../model/user-ldap';
 import { FormBuilder } from '@angular/forms';
+import { Location } from '@angular/common';
+import { ConfirmValidParentMatcher, passwordValidator } from './passwords-validator.directive';
+import { UsersService } from '../service/users.service';
 
 export abstract class LdapDetailComponent {
 
@@ -11,6 +14,7 @@ export abstract class LdapDetailComponent {
   passwordPlaceHolder: string;
   // Message d'erreur
   errorMessage = '';
+  confirmValidParentMatcher = new ConfirmValidParentMatcher();
 
   userForm = this.fb.group({
     login: [''],
@@ -20,13 +24,13 @@ export abstract class LdapDetailComponent {
     passwordGroup: this.fb.group({
       password: [''],
       confirmPassword: ['']
-    }/*TP4: , { validators: passwordValidator }*/),
+    }, { validators: passwordValidator }),
     mail: {value: '', disabled: true},
   });
 
   protected constructor(
     public addForm: boolean,
-    /* A VOIR protected route: ActivatedRoute,*/
+    /*protected route: ActivatedRoute,*/
     private fb: FormBuilder,
     private router: Router,
   ) {
@@ -71,8 +75,8 @@ export abstract class LdapDetailComponent {
 
   isFormValid() : boolean {
     return this.userForm.valid
-    // Exemple de validation d'un champ :
-    && (!this.addForm || this.formGetValue('passwordGroup.password') !== '');
+      // Exemple de validation d'un champ :
+      && (!this.addForm || this.formGetValue('passwordGroup.password') !== '');
   }
 
   abstract validateForm(): void;

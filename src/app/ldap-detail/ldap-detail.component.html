@@ -7,7 +7,7 @@
 
 <section class="loading" *ngIf="processLoadRunning==true">
     <mat-spinner diameter="25"></mat-spinner>
-    <span>&nbsp; En cours de chargement ...</span>
+    <span> En cours de chargement ...</span>
 </section>
 
 <app-alert *ngIf="errorMessage.length>0" [type]="'danger'">{{ errorMessage }}</app-alert>
@@ -24,8 +24,22 @@
                         id="nom" formControlName="nom" required
                         (input)="updateLogin()"
                     />
+                    <mat-error>Le nom est requis</mat-error>
                 </mat-form-field>
             </td>
+            <td>
+                <mat-form-field class="user-full-width">
+                    <input matInput class="form-control" placeholder="Prénom de l'utilisateur"
+                        id="prenom" formControlName="prenom" required
+                        (input)="updateLogin()"
+                    />
+                    <mat-error>Le prénom est requis</mat-error>
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>
+    <table class="user-full-width">
+        <tr>
             <td>
                 <mat-form-field class="user-full-width">
                 <input matInput class="form-control" placeholder="Login de l'utilisateur"
@@ -51,14 +65,17 @@
                         id="password" formControlName="password"
                         [errorStateMatcher]="confirmValidParentMatcher"
                     />
+                    <mat-error>Les mots de passes doivent être identiques</mat-error>
                 </mat-form-field>
             </td>
             <td>
                 <mat-form-field class="user-full-wodth">
-                    <input type="password" matInput class="form-control"
+                    <input type="password" matInput
                         placeholder="Vérification du mot de passe"
                         id="confirmPassword" formControlName="confirmPassword"
+                        [errorStateMatcher]="confirmValidParentMatcher"
                     />
+                    <mat-error>Les mots de passes doivent être identiques</mat-error>
                 </mat-form-field>
             </td>
         </tr>

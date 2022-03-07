@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,7 +12,8 @@ import { UsersService } from '../service/users.service';
   styleUrls: ['./ldap-list.component.css']
 })
 
-export class LdapListComponent implements OnInit{
+export class LdapListComponent implements OnInit {
+
   displayedColumns: string[] = ['nomComplet', 'mail', 'employeNumero'];
   dataSource = new MatTableDataSource<UserLdap>([]);
   unactiveSelected = false;
@@ -25,17 +26,12 @@ export class LdapListComponent implements OnInit{
 
   ngOnInit(): void {
       this.dataSource.paginator = this.paginator;
-
+      //this.dataSource.filterPredicate = (data: UserLdap, filter: string) => this.filterPredicate(data, filter);
       this.getUsers();
   }
 
-  ngAfterViewInit(): void {
-    console.log('Values on ngAfterViewInit():');
-    console.log("Mat Paginator:", this.paginator);
-  }
-
   filterPredicate(data, filter): boolean {
-    return !filter || data.nomComplet.tolowerCase().startsWith(filter);
+    return !filter || data.nomComplet.toLowerCase().startsWith(filter);
   }
 
   applyFilter($event: KeyboardEvent): void {
@@ -51,8 +47,7 @@ export class LdapListComponent implements OnInit{
         } else {
           this.dataSource.data = users
         }
-      }
-    );
+      });
   }
 
   unactiveChanged($event: MatSlideToggleChange): void {
