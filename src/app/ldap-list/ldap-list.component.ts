@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,7 +12,7 @@ import { UsersService } from '../service/users.service';
   styleUrls: ['./ldap-list.component.css']
 })
 
-export class LdapListComponent implements OnInit {
+export class LdapListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['nomComplet', 'mail', 'employeNumero'];
   dataSource = new MatTableDataSource<UserLdap>([]);
   unactiveSelected = false;
@@ -27,6 +27,11 @@ export class LdapListComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
 
       this.getUsers();
+  }
+
+  ngAfterViewInit(): void {
+    console.log('Values on ngAfterViewInit():');
+    console.log("Mat Paginator:", this.paginator);
   }
 
   filterPredicate(data, filter): boolean {
