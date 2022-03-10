@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LdapDetailComponent } from '../ldap-detail/ldap-detail.component';
-import { UsersService } from '../service/users.service';
+import { UsersService } from '../../service/users.service';
 
 @Component({
   selector: 'app-ldap-edit',
@@ -44,10 +44,10 @@ export class LdapEditComponent extends LdapDetailComponent implements OnInit {
   }
 
   private getUser(): void {
-    const login = this.route.snapshot.paramMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('id');
 
     this.processLoadRunning = true;
-    this.usersService.getUser(login).subscribe(
+    this.usersService.getUser(id).subscribe(
       user => {
         this.user = user;
         this.copyUserToFormControl();

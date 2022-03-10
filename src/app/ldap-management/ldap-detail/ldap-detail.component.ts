@@ -1,9 +1,7 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { UserLdap } from '../model/user-ldap';
+import { Router } from '@angular/router';
+import { UserLdap } from '../../model/user-ldap';
 import { FormBuilder } from '@angular/forms';
-import { Location } from '@angular/common';
 import { ConfirmValidParentMatcher, passwordValidator } from './passwords-validator.directive';
-import { UsersService } from '../service/users.service';
 
 export abstract class LdapDetailComponent {
 
@@ -41,10 +39,6 @@ export abstract class LdapDetailComponent {
     // Permet d'initialiser le formulaire au cas où
     // Nous n'en avons pas besoin ici
   }
-
-  /*ngOnInit(): void {
-    this.getUser();
-  }*/
 
   private formGetValue(name: string): any {
     return this.userForm.get(name).value;
@@ -87,29 +81,31 @@ export abstract class LdapDetailComponent {
     this.userForm.get('nom').setValue(this.user.nom);
     this.userForm.get('prenom').setValue(this.user.prenom);
     this.userForm.get('mail').setValue(this.user.mail);
-    /* Il faudra ajouter les champs suivant au formulaire
-    this.userForm.get('employeNumero').setValue(this.user.employeNumero);
+    /*this.userForm.get('employeNumero').setValue(this.user.employeNumero);
     this.userForm.get('employeNiveau').setValue(this.user.employeNiveau);
     this.userForm.get('dateEmbauche').setValue(this.user.dateEmbauche);
     this.userForm.get('publisherId').setValue(this.user.publisherId);
-    this.userForm.get('active').setValue(this.user.active);
-    */
+    this.userForm.get('active').setValue(this.user.active);*/
   }
 
   // Permet de récupérer les valeurs du formulaire et
   // de retourner un objet UserLdap avec ces valeurs
   protected getUserFromFormControl(): UserLdap {
     return {
+      id: this.userForm.get('id').value,
       login: this.userForm.get('login').value,
       nom: this.userForm.get('nom').value,
       prenom: this.userForm.get('prenom').value,
       nomComplet: this.userForm.get('nom').value + ' ' + this.userForm.get('prenom').value,
       mail: this.userForm.get('mail').value,
-      // Les valeurs suivantes devraient être eprise du formulaire
-      employeNumero: 1, // this.userForm.get('employeNumero').value,
-      employeNiveau: 1, // this.userForm.get('employeNiveau').value,
-      dateEmbauche: '2020-04-24', // this.userForm.get('publisherId').value,
-      publisherId: 1, // this.userForm.get('publisherId').value,
+      /*employeNumero: this.userForm.get('employeNumero').value,
+      employeNiveau: this.userForm.get('employeNiveau').value,
+      dateEmbauche: this.userForm.get('publisherId').value,
+      publisherId: this.userForm.get('publisherId').value,*/
+      employeNumero: 1,
+      employeNiveau: 1,
+      dateEmbauche: '',
+      publisherId: 1,
       active: true,
       motDePasse: '',
       role: 'ROLE_USER'

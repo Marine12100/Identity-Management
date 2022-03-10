@@ -3,8 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { UserLdap } from '../model/user-ldap';
-import { UsersService } from '../service/users.service';
+import { UserLdap } from '../../model/user-ldap';
+import { UsersService } from '../../service/users.service';
 
 @Component({
   selector: 'app-ldap-list',
@@ -25,8 +25,8 @@ export class LdapListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.dataSource.paginator = this.paginator;
-      //this.dataSource.filterPredicate = (data: UserLdap, filter: string) => this.filterPredicate(data, filter);
+      //this.dataSource.paginator = this.paginator;
+      this.dataSource.filterPredicate = (data: UserLdap, filter: string) => this.filterPredicate(data, filter);
       this.getUsers();
   }
 
@@ -56,7 +56,7 @@ export class LdapListComponent implements OnInit {
   }
 
   edit(login: string) {
-    this.router.navigate(['/user', login]).then((e) => {
+    this.router.navigate(['/users', login]).then((e) => {
       if (! e) {
         console.log("Navigation has failed!");
       }
@@ -64,7 +64,7 @@ export class LdapListComponent implements OnInit {
   }
 
   addUser() {
-    this.router.navigate(['/user/add']).then((e) => {
+    this.router.navigate(['/users/add']).then((e) => {
       if (! e) {
         console.log('Navigation has failed!');
       }

@@ -16,6 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar'
 import { MatInputModule } from '@angular/material/input'
+import { MatCardModule } from '@angular/material/card'
 
 @NgModule({
   exports:[
@@ -34,6 +35,7 @@ import { MatInputModule } from '@angular/material/input'
     MatSelectModule,
     MatSnackBarModule,
     MatInputModule,
+    MatCardModule,
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500, verticalPosition: 'top'}}
